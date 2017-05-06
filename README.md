@@ -1,6 +1,6 @@
-# MyPlaylists
+# Tubelist
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+Website for creating and sharing custom playlists using youtube videos.
 
 ## Development server
 
