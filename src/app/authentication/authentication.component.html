@@ -1,0 +1,118 @@
+<div [@flyInOut] class="container">
+  <div class="col-sm-10 co-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <img src='/assets/images/logo.png' class="img-responsive" style="padding:20px;max-width: 256px;"/>
+  </div>
+</div>
+<div class="container">
+  <div [@flyInOut] class="row">
+    <div class="col-sm-10 co-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 text-center">
+        <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+          <div class="col-sm-5">
+                <input autofocus type="text" class="form-control  fullwidth" formControlName="username" placeholder="username">
+                <div *ngIf="loginForm.controls['username'].hasError('required') && !loginForm.controls['username'].untouched " class="alert alert-danger">
+                  Please Enter Username
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <input type="password" class="form-control  fullwidth" formControlName="password" placeholder="password">
+                <div *ngIf="loginForm.controls['password'].hasError('required')  && !loginForm.controls['password'].untouched" class="alert alert-danger">
+                  Please Enter Password
+                </div>
+            </div>
+            <div class="col-sm-2">
+              <button [disabled]="isLoginSubmitable()" class="btn btn-primary fullwidth" type="submit">Login</button>
+          </div>
+        </form>
+    </div>
+
+    <div [@flyInOut] class="col-sm-12 text-center">
+      <h3>Create and share custom playlists using youtube videos</h3>
+    </div>
+  </div>
+  <div  [@flyInOut] class="row">
+    <div class="col-sm-10 co-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 text-center">
+        <h3 class="well text-center">New User</h3>
+        <!-- Signup Formm Start  -->
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+          <div class="row downpad">
+            <div class="col-sm-6">
+                <input type="text" class="form-control  fullwidth" formControlName="first_name" placeholder="First Name">
+                    <div *ngIf="signUpForm.controls['first_name'].hasError('required') && !signUpForm.controls['first_name'].untouched " class="alert alert-danger">
+                      Please Enter First Name
+                    </div>
+                    <div *ngIf="signUpForm.controls['first_name'].hasError('minlength') && !signUpForm.controls['first_name'].untouched " class="alert alert-danger">
+                      Firstname should have atleast 4 characters
+                    </div>
+            </div>
+            <div class="col-sm-6">
+                <input type="text" class="form-control  fullwidth" formControlName="last_name" placeholder="Last Name">
+                    <div *ngIf="signUpForm.controls['last_name'].hasError('required') && !signUpForm.controls['last_name'].untouched " class="alert alert-danger">
+                      Please Enter Last Name
+                    </div>
+                    <div *ngIf="signUpForm.controls['last_name'].hasError('minlength') && !signUpForm.controls['last_name'].untouched " class="alert alert-danger">
+                      Lastname should have atleast 4 characters
+                    </div>
+            </div>
+          </div>
+          <div class="row downpad">
+            <div class="col-sm-12">
+                <input type="text" class="form-control  fullwidth" formControlName="email" placeholder="email">
+                    <div *ngIf="signUpForm.controls['email'].hasError('required') && !signUpForm.controls['email'].untouched " class="alert alert-danger">
+                      Please Enter Email
+                    </div>
+                    <div *ngIf="signUpForm.controls['email'].hasError('email') && !signUpForm.controls['email'].untouched " class="alert alert-danger">
+                       Email not valid
+                    </div>
+            </div>
+          </div>
+          <div class="row  downpad">
+            <div class="col-sm-6">
+                <input type="text" class="form-control  fullwidth" formControlName="username" placeholder="Username">
+                    <div *ngIf="signUpForm.controls['username'].hasError('required') && !signUpForm.controls['username'].untouched " class="alert alert-danger">
+                      Please Enter Userame
+                    </div>
+                    <div *ngIf="signUpForm.controls['username'].hasError('minlength') && !signUpForm.controls['username'].untouched " class="alert alert-danger">
+                      Username should have atleast 4 characters
+                    </div>
+            </div>
+            <div class="col-sm-6">
+                <input type="password" class="form-control  fullwidth" formControlName="password" placeholder="Password">
+                    <div *ngIf="signUpForm.controls['password'].hasError('required') && !signUpForm.controls['password'].untouched " class="alert alert-danger">
+                      Please Enter Password
+                    </div>
+                    <div *ngIf="signUpForm.controls['password'].hasError('minlength') && !signUpForm.controls['password'].untouched " class="alert alert-danger">
+                      Password should have atleast 5 characters
+                    </div>
+            </div>
+
+          </div>
+          <div class="row  downpad">
+            <div class="col-sm-12 text-center">
+              <button [disabled]="isSignupSubmitable()" class="btn btn-primary" style="width:50%">Signup</button>
+            </div>
+
+          </div>
+        </form>
+        <!-- SignUp Form End-->
+
+
+    </div>
+
+  </div>
+  <hr>
+  <div class="row text-center">
+      <div [@flyInOut] class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <span>Developer</span><br>
+          <strong>Vaibhav Kollipara</strong>
+      </div>
+      <div [@flyInOut] class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <span>contact</span><br>
+          <strong>vkollip1@binghamton.edu<br>(660) 528-5433</strong>
+      </div>
+      <div [@flyInOut] class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <span>RestApiFrom</span><br>
+          <strong><a href="https://tubelistapi.herokuapp.com/" target="_blank">TubeListApi</a></strong>
+      </div>
+  </div>
+
+</div>

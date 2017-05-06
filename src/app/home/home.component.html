@@ -1,0 +1,49 @@
+    <div class="row text-center" *ngIf="playlists">
+        <div *ngFor="let playlist of playlists">
+                <div [@flyInOut] class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1  mycard clickable" (click)="showDetails(playlist.id)">
+                <div class="row card-image" [style.background-image]="'url(' + playlist.image_url+ ')' | safe">
+                        <!-- <img class="card-image" alt="{{ playlist.name }} image" [src]="playlist.image_url"/> -->
+                </div>
+                <div class="row" [class.selected]="isSelected(playlist.id)">
+                    <div class="col-sm-10 col-sm-offset-1 text-center">
+                        <h4>{{ playlist.name }}</h4>
+                    </div>
+                </div>
+                <div class="row" style="border:1px solid gray;border-radius: 3px;">
+                    <div class="col-sm-5 col-sm-offset-1 text-center">
+                        {{playlist.video_count}} videos
+                    </div>
+                    <div class="col-sm-5 text-center">
+                        {{playlist.createdby}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- More Playlist Start -->
+        <div *ngFor="let mplaylist of morePlaylists">
+                <div [@flyInOut] class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1  mycard" (click)="showDetails(mplaylist.id)">
+                <div class="row card-image" [style.background-image]="'url(' + mplaylist.image_url+ ')' | safe">
+                        <!-- <img class="card-image" alt="{{ playlist.name }} image" [src]="playlist.image_url"/> -->
+                </div>
+                <div class="row" [class.selected]="isSelected(mplaylist.id)">
+                    <div class="col-sm-10 col-sm-offset-1 text-center">
+                        <h4>{{ mplaylist.name }}</h4>
+                    </div>
+                </div>
+                <div class="row" style="border:1px solid gray;border-radius: 3px;">
+                    <div class="col-sm-5 col-sm-offset-1 text-center">
+                        {{mplaylist.video_count}} videos
+                    </div>
+                    <div class="col-sm-5 text-center">
+                        {{mplaylist.createdby}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- More Playlist ENd -->
+    </div>
+    <div class="row text-center" *ngIf="nextPageUrl">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+            <button class="btn btn-primary btn-block" (click)="loadMore()">more</button>
+        </div>
+    </div>

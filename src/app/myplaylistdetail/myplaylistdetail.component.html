@@ -1,0 +1,210 @@
+<!-- Modal -->
+<div [@flyInOut] class="mymodal" *ngIf="videoModalVisibility" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                   (click)="hideVideoModal()">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    New Video
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form [formGroup]="videoForm" (ngSubmit)="addVideo()">
+
+            <div class="row">
+                <div class="col-sm-12 downpad">
+                    <input autofocus type="text" class="form-control  fullwidth" formControlName="youtube_url" placeholder="https://www.youtube.com/.....">
+                    <div *ngIf="videoForm.controls['youtube_url'].hasError('required') && !videoForm.controls['youtube_url'].untouched " class="alert alert-danger">
+                      Please enter a some value
+                    </div>
+                    <div *ngIf="videoForm.controls['youtube_url'].hasError('pattern') && !videoForm.controls['youtube_url'].untouched " class="alert alert-danger">
+                      Please enter a valid youtube url
+                    </div>
+                </div>
+                <div class="col-sm-6 col-sm-offset-3 text-center downpad">
+                  <button [disabled]="isVideoFormSubmitable()" class="btn btn-primary fullwidth" type="submit">Add</button>
+                </div>
+            </div>
+
+          </form>
+
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        (click)="hideVideoModal()">
+                            Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Modal-->
+
+<!-- Modal -->
+<div [@flyInOut] class="mymodal" *ngIf="playlistModalVisibility" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                   (click)="hidePlaylistModal()">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Update Playlist
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form [formGroup]="playlistForm" (ngSubmit)="updatePlaylist()">
+
+            <div class="row">
+                <div class="col-sm-12 downpad">
+                    <input autofocus type="text" class="form-control  fullwidth" formControlName="name" placeholder="Title">
+                    <div *ngIf="playlistForm.controls['name'].hasError('required') && !playlistForm.controls['name'].untouched " class="alert alert-danger">
+                      Please Enter Playlist Title
+                    </div>
+                </div>
+                <div class="col-sm-12 downpad">
+                    <input type="textarea" class="form-control  fullwidth" formControlName="description" placeholder="description">
+                    <div *ngIf="playlistForm.controls['description'].hasError('required')  && !playlistForm.controls['description'].untouched" class="alert alert-danger">
+                      Please Enter Description
+                    </div>
+                </div>
+                <div class="col-sm-12 downpad">
+                    <input type="text" class="form-control  fullwidth" formControlName="image_url" placeholder="image url">
+                    <div *ngIf="playlistForm.controls['image_url'].hasError('required')  && !playlistForm.controls['image_url'].untouched" class="alert alert-danger">
+                      Please Enter Playlist Image url
+                    </div>
+                </div>
+                <div class="col-sm-6 col-sm-offset-3 text-center downpad">
+                  <button [disabled]="isPlaylistFormSubmitable()" class="btn btn-primary fullwidth" type="submit">Update</button>
+                </div>
+            </div>
+
+          </form>
+
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                       (click)="hidePlaylistModal()">
+                            Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Modal-->
+
+<div *ngIf="playlist">
+            <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-1">
+                <button [@flyInOut] (click)="goBack()" class="btn btn-primary visible-lg visible-md" style="margin-top: 50px;margin-bottom:10px;width:100%;"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                <button [@flyInOut] (click)="goBack()" class="btn btn-primary visible-sm visible-xs" style="margin-bottom:10px;width:100%;"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+            </div>
+            <div [@flyInOut] class="col-xs-12 col-sm-10 co-sm-offset-1 col-md-3 col-lg-3 text-center">
+                <img style="width: 20em;" src="{{ playlist.image_url}}" alt="{{ playlist.name}} image">
+            </div>
+            <div [@flyInOut] class="col-xs-8 col-xs-offset-2 col-sm-8 co-sm-offset-2 col-md-3 col-md-offset-1 col-lg-3">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 text-right">
+                        <h4><span class="label label-info">Title</span></h4>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 text-left">
+                        <h4>{{ playlist.name }}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 text-right">
+                        <p class="label label-info">Description</p>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 text-left">
+                        <p>{{ playlist.description }}</p>
+                    </div>
+                </div>
+                <div class="row downpad">
+                    <div class="col-xs-4 col-sm-4 text-right">
+                        <p class="label label-info">Visibility</p>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 text-left clickable" *ngIf="playlist.is_public">
+                        <a (click)="makePrivate()" >Make Private</a>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 text-left clickable" *ngIf="!playlist.is_public">
+                        <a (click)="makePublic()" >Make Public</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-10 co-sm-offset-1 col-md-2 col-lg-2 textcenter">
+                    <button [@flyInOut] (click)="showPlaylistModal()" class="btn btn-info downpad" style="width:100%;"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <button [@flyInOut] (click)="deletePlaylist()" class="btn btn-danger downpad" style="width:100%;"><span class="glyphicon glyphicon-trash"></span></button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div [@flyInOut] class="col-sm-12 col-md-8 col-lg-8 text-center">
+            <div class="visible-xs">
+                <iframe *ngIf="video_detail" width="350" height="200" [src]="sanitizer.bypassSecurityTrustResourceUrl(video_source)" frameborder="2" allowfullscreen></iframe>
+                <h3 *ngIf="!video_detail" style="padding-top : 93px;padding-bottom: 93px;border: 2px solid black;">Select a video from the list</h3>
+            </div>
+            <div class="visible-sm" >
+                <iframe *ngIf="video_detail" width="650" height="375" [src]="sanitizer.bypassSecurityTrustResourceUrl(video_source)" frameborder="1" allowfullscreen></iframe>
+                <h3 *ngIf="!video_detail" style="padding-top : 155px;padding-bottom: 155px;border: 2px solid black;">Select a video from the list</h3>
+            </div>
+            <div class="visible-md">
+                <iframe *ngIf="video_detail" width="600" height="350" [src]="sanitizer.bypassSecurityTrustResourceUrl(video_source)" frameborder="1" allowfullscreen></iframe>
+                <h3 *ngIf="!video_detail" style="padding-top : 173px;padding-bottom: 173px;border: 2px solid black;">Select a video from the list</h3>
+            </div>
+            <div class="visible-lg">
+                <iframe *ngIf="video_detail" width="750" height="400" [src]="sanitizer.bypassSecurityTrustResourceUrl(video_source)" frameborder="1" allowfullscreen></iframe>
+                <h3 *ngIf="!video_detail" style="padding-top : 193px;padding-bottom: 193px;border: 2px solid black;">Select a video from the list</h3>
+            </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4  scroll-area">
+                <div class="row text-center">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <button [@flyInOut] (click)="showVideoModal()" class='btn btn-primary fullwidth'><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;New Video</button>
+                    </div>
+                </div>
+            <!---------------------------------->
+                <div [@flyInOut] class="row my-list-item clickable" *ngFor="let video of playlist.videos" [class.selected-video]="isSelectedVideo(video.id)">
+
+                    <div class="col-xs-4 col-sm-4" (click)="playVideo(video.id)">
+                        <img style="width:60px;" src="{{ video.thumbnail_url }}">
+                    </div>
+                    <div class="col-xs-8 col-sm-8">
+                        <div class="row" (click)="playVideo(video.id)">
+                            <strong>{{ video.title }}</strong>
+                        </div>
+                        <div class="row">
+                            <span class="label label-info" (click)="playVideo(video.id)"> {{ video.date_added | date : short }}</span>
+                            <button (click)="deleteVideo(video.id)" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></button>
+                        </div>
+                    </div>
+                </div>
+            <!---------------------------------->
+            </div>
+        </div>
+</div>

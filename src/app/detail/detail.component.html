@@ -1,0 +1,76 @@
+<div *ngIf="playlist">
+            <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-1">
+                <button [@flyInOut] (click)="goBack()" class="btn btn-primary visible-lg visible-md" style="margin-top: 50px;margin-bottom:10px;width:100%;"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                <button [@flyInOut] (click)="goBack()" class="btn btn-primary visible-sm visible-xs" style="margin-top: 10px;margin-bottom:10px;width:100%;"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+            </div>
+            <div [@flyInOut] class="col-xs-12 col-sm-10 co-sm-offset-1 col-md-3 col-lg-3 text-center">
+            <img style="width: 20em;" src="{{ playlist.image_url}}" alt="{{ playlist.name}} image">
+            </div>
+            <div [@flyInOut] class="col-xs-8 col-xs-offset-2 col-sm-8 co-sm-offset-2 col-md-3 col-md-offset-1 col-lg-3">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 text-right">
+                        <h4><span class="label label-info">Title</span></h4>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 text-left">
+                        <h4>{{ playlist.name }}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 text-right">
+                        <p class="label label-info">Description</p>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 text-left">
+                        <p>{{ playlist.description }}</p>
+                    </div>
+                </div>
+                <div class="row downpad">
+                    <div class="col-xs-4 col-sm-4 text-right">
+                        <p class="label label-info">Owner</p>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 text-left">
+                        <p>{{ playlist.createdby }}</p>
+                    </div>
+                </div>
+            </div>
+        </div> <hr>
+
+        <div class="row">
+            <div [@flyInOut] class="col-sm-12 col-md-8 col-lg-8 text-center">
+            <div class="visible-xs">
+                <iframe *ngIf="video_detail" width="350" height="200" [src]="sanitizer.bypassSecurityTrustResourceUrl(video_source)" frameborder="2" allowfullscreen></iframe>
+                <h3 *ngIf="!video_detail" style="padding-top : 93px;padding-bottom: 93px;border: 2px solid black;">Select a video from the list</h3>
+            </div>
+            <div class="visible-sm" >
+                <iframe *ngIf="video_detail" width="650" height="375" [src]="sanitizer.bypassSecurityTrustResourceUrl(video_source)" frameborder="1" allowfullscreen></iframe>
+                <h3 *ngIf="!video_detail" style="padding-top : 155px;padding-bottom: 155px;border: 2px solid black;">Select a video from the list</h3>
+            </div>
+            <div class="visible-md">
+                <iframe *ngIf="video_detail" width="600" height="350" [src]="sanitizer.bypassSecurityTrustResourceUrl(video_source)" frameborder="1" allowfullscreen></iframe>
+                <h3 *ngIf="!video_detail" style="padding-top : 173px;padding-bottom: 173px;border: 2px solid black;">Select a video from the list</h3>
+            </div>
+            <div class="visible-lg">
+                <iframe *ngIf="video_detail" width="750" height="400" [src]="sanitizer.bypassSecurityTrustResourceUrl(video_source)" frameborder="1" allowfullscreen></iframe>
+                <h3 *ngIf="!video_detail" style="padding-top : 193px;padding-bottom: 193px;border: 2px solid black;">Select a video from the list</h3>
+            </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4  scroll-area">
+            <!---------------------------------->
+                <div [@flyInOut] class="row my-list-item clickable" *ngFor="let video of playlist.videos" (click)="playVideo(video.id)" [class.selected-video]="isSelectedVideo(video.id)">
+
+                    <div class="col-xs-4 col-sm-4">
+                        <img style="width:60px;" src="{{ video.thumbnail_url }}">
+                    </div>
+                    <div class="col-xs-8 col-sm-8">
+                        <div class="row">
+                            <strong>{{ video.title }}</strong>
+                        </div>
+                        <div class="row">
+                            <span class="label label-info"> {{ video.date_added | date : short }}</span>
+                        </div>
+                    </div>
+                </div>
+            <!---------------------------------->
+            </div>
+        </div>
+</div>
