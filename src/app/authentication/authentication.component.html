@@ -20,7 +20,9 @@
                 </div>
             </div>
             <div class="col-sm-2">
-              <button [disabled]="isLoginSubmitable()" class="btn btn-primary fullwidth" type="submit">Login</button>
+              <button [disabled]="isLoginSubmitable()" class="btn btn-primary fullwidth" type="submit">
+              <span *ngIf="loginLoading" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+              &nbsp;Login</button>
           </div>
         </form>
     </div>
@@ -88,7 +90,9 @@
           </div>
           <div class="row  downpad">
             <div class="col-sm-12 text-center">
-              <button [disabled]="isSignupSubmitable()" class="btn btn-primary" style="width:50%">Signup</button>
+              <button [disabled]="isSignupSubmitable()" class="btn btn-primary" style="width:50%">
+              <span *ngIf="signupLoading" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+              &nbsp;Signup</button>
             </div>
 
           </div>
