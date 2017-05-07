@@ -18,7 +18,8 @@ export class AuthenticationComponent implements OnInit {
   signUpStatus: boolean = false;
   signUpForm : FormGroup;
   loginForm : FormGroup;
-  loading: boolean = false;
+  loginLoading: boolean = false;
+  signupLoading: boolean = false;
 
   signUpSubscription : any;
   loginSubscription : any;
@@ -51,7 +52,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   signIn(){
-     this.loading = true;
+     this.loginLoading = true;
      let credentials = this.loginForm.value;
      let data ={
         'username' : credentials.username,
@@ -64,15 +65,15 @@ export class AuthenticationComponent implements OnInit {
        }else{
          alert("Failed to login");
        }
-       this.loading = false;
+       this.loginLoading = false;
      },err=>{
        alert("Something went wrong");
-       this.loading = false;
+       this.loginLoading = false;
      });
   }
 
   signUp(){
-    this.loading = true;
+    this.signupLoading = true;
     let userDetails = this.signUpForm.value;
     let data = {
       'first_name':userDetails.first_name,
@@ -85,7 +86,7 @@ export class AuthenticationComponent implements OnInit {
     this.signUpSubscription =  this._auth.register(data)
               .subscribe((res) => {
                 alert("Signup successful");
-                this.loading = false;
+                this.signupLoading = false;
                 this.signUpForm.reset();
               },
               (err) => {
@@ -94,19 +95,19 @@ export class AuthenticationComponent implements OnInit {
                 }else{
                   alert("Something wrong...");
                 }
-                this.loading = false;
+                this.signupLoading = false;
               });
   }
 
   isLoginSubmitable(): boolean{
-    if(!this.loginForm.valid || this.loading)
+    if(!this.loginForm.valid || this.loginLoading)
       return true;
     else
       return false;
   }
 
   isSignupSubmitable(): boolean{
-    if(!this.signUpForm.valid || this.loading)
+    if(!this.signUpForm.valid || this.signupLoading)
       return true;
     else
       return false;
